@@ -1,0 +1,20 @@
+version: "3.2"
+
+services:
+  # skipper:
+  #   build:
+  #     context: ./skipper
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./skipper:/app
+  #   ports:
+  #     - 5000:5000
+  #     - 5001:5001
+
+  database:
+    image: postgres
+    container_name: cbet_db
+    env_file:
+      - "docker-compose.env"
+    ports:
+      - 5432:5432
