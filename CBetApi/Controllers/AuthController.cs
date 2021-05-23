@@ -12,10 +12,12 @@ namespace CBetApi.Controllers
     public class AuthController : ControllerBase
     {
         private readonly AuthService _authService;
+        private readonly UserService _userService;
 
-        public AuthController(AuthService authService)
+        public AuthController(AuthService authService, UserService userService)
         {
             _authService = authService;
+            _userService = userService;
         }
 
         [HttpPost("login")]
@@ -33,9 +35,9 @@ namespace CBetApi.Controllers
                 return Unauthorized();
             }
 
+            var user = _userService.FindUserByEmailAsync(options.Email).Result;
 
-
-            return Ok(new { token });
+            return Ok(new { user.Id, user.FirstName, user.LastName, user.Username, user.Email, token });
         }
 
     }
