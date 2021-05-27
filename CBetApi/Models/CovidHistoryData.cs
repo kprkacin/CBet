@@ -9,9 +9,11 @@ namespace CBetApi.Models
 {
     public class CovidHistoryData
     {
+        public int CountryId { get; set; }
         public string Code { get; set; }
-        public long thisDayLastWeek { get; set; }
-        public long averageLastWeek { get; set; }
+        public long ThisDayLastWeek { get; set; }
+        public long AverageLastWeek { get; set; }
+        public long Yesterday { get; set; }
 
     }
 }

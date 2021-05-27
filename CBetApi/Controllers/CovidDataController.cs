@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace CBetApi.Controllers
 {
     [ApiController]
-    // [Authorize]
+    [Authorize]
     [Route("v1/[controller]")]
     public class CovidDataController : ControllerBase
     {
@@ -31,5 +31,14 @@ namespace CBetApi.Controllers
 
             return Ok(data);
         }
+
+        [HttpGet("countries")]
+        public async Task<IActionResult> Country()
+        {
+            var data = await _covidDataService.GetCountries();
+
+            return Ok(data);
+        }
+
     }
 }

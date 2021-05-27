@@ -45,7 +45,9 @@ namespace CBetApi.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var bets = await _betService.GetBets();
+            var claimsIdentity = this.User.Identity as ClaimsIdentity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var bets = await _betService.GetBets(Int32.Parse(userId));
 
 
             return Ok(bets);

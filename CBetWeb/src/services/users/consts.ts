@@ -1,3 +1,4 @@
+import { getAccessToken } from '../auth/services';
 import { User } from './types';
 
 export const initialUser: User = {
@@ -5,5 +6,5 @@ export const initialUser: User = {
   lastName: null,
   username: null,
   email: null,
-  token: '1241241221',
+  token: getAccessToken(),
 };

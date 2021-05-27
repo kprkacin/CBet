@@ -24,7 +24,10 @@ namespace CBetApi.Services
                 BaseAddress = new Uri("https://covid-api.mmediagroup.fr")
             };
         }
-
+        public async Task<List<Country>> GetCountries()
+        {
+            return await _db.Countries.ToListAsync<Country>();
+        }
         public async Task<List<CovidHistoryData>> GetHistoryData()
         {
             var url = string.Format("/v1/history?status=confirmed");
@@ -49,10 +52,14 @@ namespace CBetApi.Services
                 all.TryGetProperty("dates", out JsonElement dates);
                 all.TryGetProperty("abbreviation", out JsonElement code);
                 CovidHistoryData data = formatHistoryData(dates);
-
+                var country = await _db.Countries.FirstOrDefaultAsync(e => e.Name == entry.Key.ToString());
                 data.Code = entry.Key.ToString();
+                if (country != null)
+                {
+                    data.CountryId = country.Id;
+                    newResult.Add(data);
 
-                newResult.Add(data);
+                }
             }
             return newResult;
         }
@@ -77,10 +84,14 @@ namespace CBetApi.Services
                 avg = avg + (casesDate.GetInt64() - casesDateBefore.GetInt64());
                 if (i == 7)
                 {
-                    data.thisDayLastWeek = casesDate.GetInt64() - casesDateBefore.GetInt64();
+                    data.ThisDayLastWeek = casesDate.GetInt64() - casesDateBefore.GetInt64();
+                }
+                if (i == 1)
+                {
+                    data.Yesterday = casesDate.GetInt64() - casesDateBefore.GetInt64();
                 }
             }
-            data.averageLastWeek = avg / 7;
+            data.AverageLastWeek = avg / 7;
 
             return data;
         }

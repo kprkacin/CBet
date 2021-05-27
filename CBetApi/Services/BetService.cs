@@ -24,10 +24,11 @@ namespace CBetApi.Services
             var bet = new Bet()
             {
                 Coeficient = 1,
-                CountryId = model.CountryCode,
+                CountryId = model.CountryId,
                 UserId = userId,
-                Value = model.Amount,
+                Value = model.Value,
                 CreatedAt = DateTime.UtcNow,
+                Amount = model.Amount,
                 PayoutAt = DateTime.Now.AddDays(7),
 
             };
@@ -37,9 +38,9 @@ namespace CBetApi.Services
 
             return newBet.Entity;
         }
-        public async Task<List<Bet>> GetBets()
+        public async Task<List<Bet>> GetBets(int userId)
         {
-            return await _db.Bets.ToListAsync<Bet>();
+            return await _db.Bets.Where(e => e.UserId == userId).ToListAsync<Bet>();
         }
     }
 }

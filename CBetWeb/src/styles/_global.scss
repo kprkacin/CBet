@@ -3,3 +3,9 @@
   width: 100%;
   background-color: $cBetPrimary;
 }
+.privateWrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  background-color: $cBetPrimary;
+}

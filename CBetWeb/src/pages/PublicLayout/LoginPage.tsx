@@ -64,6 +64,7 @@ export const LoginPage: React.FC = () => {
                     name={'password'}
                     placeholder="Password"
                     control={control}
+                    type="password"
                     className="loginInput"
                     error={!!errors.password}
                   />
