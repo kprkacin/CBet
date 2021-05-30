@@ -1454,26 +1454,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Karlo\\.nuget\\packages\\": {}
+    "/Users/karlo/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\ASPDev\\CBet\\CBetApi\\CBetApi.csproj",
+      "projectUniqueName": "/Users/karlo/Faks/CBet/CBet/CBetApi/CBetApi.csproj",
       "projectName": "CBetApi",
-      "projectPath": "C:\\ASPDev\\CBet\\CBetApi\\CBetApi.csproj",
-      "packagesPath": "C:\\Users\\Karlo\\.nuget\\packages\\",
-      "outputPath": "C:\\ASPDev\\CBet\\CBetApi\\obj\\",
+      "projectPath": "/Users/karlo/Faks/CBet/CBet/CBetApi/CBetApi.csproj",
+      "packagesPath": "/Users/karlo/.nuget/packages/",
+      "outputPath": "/Users/karlo/Faks/CBet/CBet/CBetApi/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Karlo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/karlo/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1547,7 +1545,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.101/RuntimeIdentifierGraph.json"
       }
     }
   }

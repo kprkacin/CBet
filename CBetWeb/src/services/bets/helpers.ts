@@ -1,13 +1,14 @@
 export const calculateCoefficient = (
-  value: number | null,
-  avg: number | null
+  avg: number | null,
+  value: number | null
 ) => {
   if (!value || !avg) {
-    return 0;
+    return '0';
   }
-  const difference = Math.abs(avg - value);
-  if (difference > avg) {
-    return Math.ceil(difference / avg) * 100;
+  const base = 1.1;
+
+  if (value > avg) {
+    return ((value / avg) * base).toFixed(4);
   }
-  return Math.ceil(avg / difference) * 100;
+  return ((avg / value) * base).toFixed(4);
 };

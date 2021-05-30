@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   Button,
   Card,
@@ -14,10 +14,12 @@ import {
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { SelectField } from '../../common/components/SelectField';
+import { Table } from '../../common/components/Table';
 import { TextField } from '../../common/components/TextField';
 import { TextFieldVertical } from '../../common/components/TextFieldVertical';
-import { createBet } from '../../services/bets/api';
+import { createBet, fetchBets } from '../../services/bets/api';
 import { calculateCoefficient } from '../../services/bets/helpers';
+import { Bet } from '../../services/bets/types';
 import { Country } from '../../services/covidData/types';
 import { useGlobalContext } from '../../services/providers/GlobalProvider';
 
@@ -27,25 +29,47 @@ export const BettingPage: React.FC = () => {
     handleSubmit,
     watch,
     formState: { errors },
-    reset,
+    setValue,
   } = useForm();
 
   const { countries, covidData } = useGlobalContext();
 
-  const { country, amount } = watch();
+  const { country, value, amount } = watch();
 
+  const [bets, setBets] = useState<Bet[]>([]);
   const selectedCovidData = useMemo(() => {
     if (country) {
       return covidData.find((c) => c.countryId === country.id);
     }
-    return covidData.find((c) => (c.countryName = 'Global'))!;
+    return covidData.find((c) => c.countryName === 'Global')!;
   }, [country, covidData]);
 
   const coefficient = useMemo(
-    () => calculateCoefficient(selectedCovidData?.avg || 0, parseInt(amount)),
-    [selectedCovidData, amount]
+    () => calculateCoefficient(selectedCovidData?.avg || 0, parseInt(value)),
+    [selectedCovidData, value]
   );
 
+  const payout = useMemo(
+    () => ((amount || 0) * parseFloat(coefficient)).toFixed(4),
+    [coefficient, amount]
+  );
+
+  useEffect(() => {
+    const initialCountry = countries.find((c) => c.name === 'Global')!;
+
+    setValue('country', initialCountry);
+  }, [countries]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const betsData = await fetchBets();
+        setBets(betsData);
+      } catch (e) {
+        //ignore error
+      }
+    })();
+  }, []);
   const onSubmit = async (data: any) => {
     try {
       await createBet({ ...data, coefficient: coefficient });
@@ -115,13 +139,13 @@ export const BettingPage: React.FC = () => {
                 </Card.Header>
                 <Card.Body>
                   <TextField
-                    name={'amount'}
+                    name={'value'}
                     placeholder="Number of Cases"
                     control={control}
-                    error={!!errors.amount}
+                    error={!!errors.value}
                   />
                   <TextField
-                    name={'bet'}
+                    name={'amount'}
                     placeholder="Bet Amount"
                     control={control}
                     error={!!errors.amount}
@@ -153,15 +177,49 @@ export const BettingPage: React.FC = () => {
                   <b>Payout</b>
                 </Card.Header>
                 <Card.Body>
-                  <p>{coefficient}</p>
+                  <p>{payout}</p>
                 </Card.Body>
               </Card>
             </Col>
           </Row>
         </Container>
       </Form>
+      <Table columns={columns()} data={bets} />
     </div>
   );
 };
 
 export const route = '/betting';
+
+const columns: any = () => {
+  return [
+    {
+      Header: 'ID',
+      accessor: 'status',
+    },
+    {
+      Header: 'Value',
+      accessor: 'value',
+    },
+    {
+      Header: 'Amount',
+      accessor: 'amount',
+    },
+    {
+      Header: 'Coefficient',
+      accessor: 'coefficient',
+    },
+    {
+      Header: 'Country',
+      accessor: 'statu4s',
+    },
+    {
+      Header: 'Date',
+      accessor: 'stat5us',
+    },
+    {
+      Header: 'Result',
+      accessor: 'statu3s',
+    },
+  ];
+};
