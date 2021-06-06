@@ -1,13 +1,5 @@
 import React, { useCallback } from 'react';
-import {
-  Button,
-  Card,
-  Container,
-  Jumbotron,
-  Nav,
-  Navbar,
-  NavDropdown,
-} from 'react-bootstrap';
+import { Button, Card, Jumbotron, Nav, Navbar } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 export const LandingPage: React.FC = () => {

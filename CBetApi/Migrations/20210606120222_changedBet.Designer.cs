@@ -4,14 +4,16 @@ using CBetApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CBetApi.Migrations
 {
     [DbContext(typeof(CBetApiDbContext))]
-    partial class CBetApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210606120222_changedBet")]
+    partial class changedBet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

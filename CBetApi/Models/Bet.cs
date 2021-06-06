@@ -15,7 +15,7 @@ namespace CBetApi.Models
         [Required]
         public double Value { get; set; }
         [Required]
-        public double Amount { get; set; }
+        public float Amount { get; set; }
         [ForeignKey(nameof(Country))]
         public int? CountryId { get; set; }
         public Country Country { get; set; }

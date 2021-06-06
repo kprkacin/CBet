@@ -1,20 +1,11 @@
-import React, { useCallback } from 'react';
-import {
-  Button,
-  Card,
-  Container,
-  Jumbotron,
-  Nav,
-  Navbar,
-  NavDropdown,
-} from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
+import { Button, Jumbotron } from 'react-bootstrap';
 
 export const DashboardPage: React.FC = () => {
   return (
     <div className="landingPage">
       <Jumbotron className="landingJumbo" fluid>
-        <h1>CBet online DASHBOARD</h1>
+        <img alt="banner" src="/logo.png"></img>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad

@@ -1,4 +1,3 @@
-import { transformUser } from '../users/transformations';
 import { createApiCall } from '../api/api';
 import { transformCountry, transformCovidData } from './transformations';
 

@@ -1,14 +1,6 @@
 import React, { useCallback } from 'react';
-import {
-  Button,
-  Card,
-  Container,
-  Jumbotron,
-  Nav,
-  Navbar,
-  NavDropdown,
-} from 'react-bootstrap';
-import { NavLink, useHistory } from 'react-router-dom';
+import { Nav, Navbar } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import { logoutUser } from '../../services/auth/api';
 
 export const PrivateNavbar: React.FC = () => {
@@ -27,7 +19,9 @@ export const PrivateNavbar: React.FC = () => {
 
   return (
     <Navbar sticky="top" expand="lg">
-      <Navbar.Brand onClick={() => redirect('/dashboard')}>CBet</Navbar.Brand>
+      <Navbar.Brand onClick={() => redirect('/dashboard')}>
+        <img width="45" height="45" alt="logo" src="/logo.png"></img>
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse className="landingNav" id="basic-navbar-nav">
         <Nav>

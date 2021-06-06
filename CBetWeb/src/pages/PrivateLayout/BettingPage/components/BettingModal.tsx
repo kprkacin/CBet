@@ -1,29 +1,16 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Form,
-  Jumbotron,
-  Nav,
-  Navbar,
-  NavDropdown,
-  Row,
-} from 'react-bootstrap';
+import React, { useEffect, useMemo } from 'react';
+import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
-import { SelectField } from '../../common/components/SelectField';
-import { Table } from '../../common/components/Table';
-import { TextField } from '../../common/components/TextField';
-import { TextFieldVertical } from '../../common/components/TextFieldVertical';
-import { createBet, fetchBets } from '../../services/bets/api';
-import { calculateCoefficient } from '../../services/bets/helpers';
-import { Bet } from '../../services/bets/types';
-import { Country } from '../../services/covidData/types';
-import { useGlobalContext } from '../../services/providers/GlobalProvider';
+import { Header } from '../../../../common/components/Header';
+import { SelectField } from '../../../../common/components/SelectField';
+import { TextField } from '../../../../common/components/TextField';
+import { createBet } from '../../../../services/bets/api';
+import { calculateCoefficient } from '../../../../services/bets/helpers';
+import { Country } from '../../../../services/covidData/types';
+import { useGlobalContext } from '../../../../services/providers/GlobalProvider';
 
-export const BettingPage: React.FC = () => {
+export const BettingFormModal: React.FC<BettingFormModalProps> = (props) => {
+  const { onSave } = props;
   const {
     control,
     handleSubmit,
@@ -36,7 +23,6 @@ export const BettingPage: React.FC = () => {
 
   const { country, value, amount } = watch();
 
-  const [bets, setBets] = useState<Bet[]>([]);
   const selectedCovidData = useMemo(() => {
     if (country) {
       return covidData.find((c) => c.countryId === country.id);
@@ -58,27 +44,19 @@ export const BettingPage: React.FC = () => {
     const initialCountry = countries.find((c) => c.name === 'Global')!;
 
     setValue('country', initialCountry);
-  }, [countries]);
+  }, [setValue, countries]);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const betsData = await fetchBets();
-        setBets(betsData);
-      } catch (e) {
-        //ignore error
-      }
-    })();
-  }, []);
   const onSubmit = async (data: any) => {
     try {
       await createBet({ ...data, coefficient: coefficient });
     } catch (e) {
       // ignore error
     }
+    onSave();
   };
   return (
-    <div className="landingPage">
+    <>
+      <Header title="Make a bet" />
       <Form
         id="form"
         style={{ width: '100%' }}
@@ -86,17 +64,6 @@ export const BettingPage: React.FC = () => {
         className="form"
       >
         <Container fluid className="bettingPage">
-          <Row
-            style={{
-              width: '100%',
-              justifyContent: 'center',
-              marginBottom: '40px',
-            }}
-          >
-            <Col xs="6" style={{ textAlign: 'center' }}>
-              <h1>Create Bet</h1>
-            </Col>
-          </Row>
           <Row style={{ width: '100%' }}>
             <Col xs={12} lg={4}>
               <Card className="infoCard">
@@ -114,7 +81,6 @@ export const BettingPage: React.FC = () => {
                   <b>Today Last Week:</b>
                 </Card.Header>
                 <Card.Body>
-                  {' '}
                   <p>{selectedCovidData?.todayLastWeek}</p>
                 </Card.Body>
               </Card>
@@ -125,7 +91,6 @@ export const BettingPage: React.FC = () => {
                   <b>Yesterday:</b>
                 </Card.Header>
                 <Card.Body>
-                  {' '}
                   <p>{selectedCovidData?.yesterday}</p>
                 </Card.Body>
               </Card>
@@ -184,42 +149,10 @@ export const BettingPage: React.FC = () => {
           </Row>
         </Container>
       </Form>
-      <Table columns={columns()} data={bets} />
-    </div>
+    </>
   );
 };
 
-export const route = '/betting';
-
-const columns: any = () => {
-  return [
-    {
-      Header: 'ID',
-      accessor: 'status',
-    },
-    {
-      Header: 'Value',
-      accessor: 'value',
-    },
-    {
-      Header: 'Amount',
-      accessor: 'amount',
-    },
-    {
-      Header: 'Coefficient',
-      accessor: 'coefficient',
-    },
-    {
-      Header: 'Country',
-      accessor: 'statu4s',
-    },
-    {
-      Header: 'Date',
-      accessor: 'stat5us',
-    },
-    {
-      Header: 'Result',
-      accessor: 'statu3s',
-    },
-  ];
-};
+export interface BettingFormModalProps {
+  onSave: () => void;
+}

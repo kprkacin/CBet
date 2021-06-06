@@ -23,7 +23,7 @@ namespace CBetApi.Services
         {
             var bet = new Bet()
             {
-                Coeficient = 1,
+                Coeficient = model.Coeficient,
                 CountryId = model.CountryId,
                 UserId = userId,
                 Value = model.Value,

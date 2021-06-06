@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
 
 import { LoginForm } from './types';
 import { yupLoginSchema } from './validations';
 import { initialFormLogin } from './consts';
 import { validateUser } from '../../services/auth/api';
 import { useGlobalContext } from '../../services/providers/GlobalProvider';
-import { TextField } from '../../common/components/TextField';
 import { setAccessToken } from '../../services/auth/services';
 import { TextFieldVertical } from '../../common/components/TextFieldVertical';
 

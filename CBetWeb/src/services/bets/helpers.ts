@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 export const calculateCoefficient = (
   avg: number | null,
   value: number | null
@@ -11,4 +13,8 @@ export const calculateCoefficient = (
     return ((value / avg) * base).toFixed(4);
   }
   return ((avg / value) * base).toFixed(4);
+};
+
+export const dateToFormatedString = (date: Date | null): string | null => {
+  return date ? dayjs(date).format('YYYY/MM/DD') : null;
 };

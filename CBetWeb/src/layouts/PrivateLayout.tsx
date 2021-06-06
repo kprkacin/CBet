@@ -1,5 +1,4 @@
-import React from 'react';
-import { Navbar, Nav } from 'react-bootstrap';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import {
   route as dashboardRoute,
@@ -8,11 +7,27 @@ import {
 import {
   route as bettingRoute,
   BettingPage,
-} from '../pages/PrivateLayout/BettingPage';
+} from '../pages/PrivateLayout/BettingPage/BettingPage';
 import { PrivateNavbar } from '../pages/PrivateLayout/PrivateNavbar';
-import { logoutUser } from '../services/auth/api';
+import { fetchCovidData, fetchCountries } from '../services/covidData/api';
+import { useGlobalContext } from '../services/providers/GlobalProvider';
 
 export const PrivateLayout: React.FC = () => {
+  const { setCountries, setCovidData } = useGlobalContext();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const covidData = await fetchCovidData();
+        const countries = await fetchCountries();
+        setCountries(countries);
+        setCovidData(covidData);
+      } catch {
+        // ignore
+      }
+    })();
+  }, [setCountries, setCovidData]);
+
   return (
     <BrowserRouter>
       <div className="privateWrapper">
