@@ -9,3 +9,11 @@ export const transformUser = (res: any): User => {
     token: res.token,
   };
 };
+export const transformToPatchUser = (user: User): any => {
+  return {
+    firstName: user.firstName,
+    lastName: user.lastName,
+    username: user.username,
+    email: user.email,
+  };
+};

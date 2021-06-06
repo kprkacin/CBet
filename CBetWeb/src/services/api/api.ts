@@ -9,7 +9,6 @@ export const api = axios.create({
 export const createApiCall =
   (config: AxiosRequestConfig, toastSettings?: toastSettings | null) =>
   async () => {
-    console.log(config);
     if (!toastSettings) {
       return api(config);
     }

@@ -9,3 +9,16 @@
   flex-direction: column;
   background-color: $cBetPrimary;
 }
+.roundButton {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 2px 8px;
+  border: 1px solid #ebf0f5 !important;
+  box-sizing: border-box;
+  border-radius: 16px;
+  font-size: 11px;
+  color: darkgrey !important;
+  background-color: white !important;
+  line-height: 16px;
+}

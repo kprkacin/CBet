@@ -8,6 +8,10 @@ import {
   route as bettingRoute,
   BettingPage,
 } from '../pages/PrivateLayout/BettingPage/BettingPage';
+import {
+  route as accountRoute,
+  AccountPage,
+} from '../pages/PrivateLayout/AccountPage/AccountPage';
 import { PrivateNavbar } from '../pages/PrivateLayout/PrivateNavbar';
 import { fetchCovidData, fetchCountries } from '../services/covidData/api';
 import { useGlobalContext } from '../services/providers/GlobalProvider';
@@ -34,7 +38,8 @@ export const PrivateLayout: React.FC = () => {
         <PrivateNavbar />
         <Switch>
           <Route exact path={bettingRoute} component={BettingPage} />
-          <Route path={dashboardRoute} component={DashboardPage} />
+          <Route exact path={dashboardRoute} component={DashboardPage} />
+          <Route exact path={accountRoute} component={AccountPage} />
         </Switch>
       </div>
     </BrowserRouter>

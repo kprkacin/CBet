@@ -34,10 +34,47 @@ namespace CBetApi.Services
 
             return newUser.Entity;
         }
+        public async Task<User> UpdateAsync(UpdateForm model, User user)
+        {
+            if (model.FirstName != null)
+            {
+                user.FirstName = model.FirstName;
+            }
+            if (model.LastName != null)
+            {
+                user.LastName = model.LastName;
+            }
+            if (model.Username != null)
+            {
+                user.Username = model.Username;
+            }
+            if (model.Email != null)
+            {
+                user.Email = model.Email;
+            }
+
+
+            _db.Attach(user);
+            await _db.SaveChangesAsync();
+
+            return user;
+        }
 
         public async Task<User> FindUserByEmailAsync(string email)
         {
             return await _db.Users.FirstOrDefaultAsync(e => e.Email == email);
+        }
+
+        public async Task<User> FindUserByIdAsync(int id)
+        {
+            return await _db.Users.FirstOrDefaultAsync(e => e.Id == id);
+        }
+
+        public async Task UpdateUserPassword(User user, string newPassword)
+        {
+            user.Password = new User().HashPassword(newPassword);
+            _db.Attach(user);
+            await _db.SaveChangesAsync();
         }
 
     }

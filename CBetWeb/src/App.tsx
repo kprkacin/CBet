@@ -5,12 +5,12 @@ import { PrivateLayout } from './layouts/PrivateLayout';
 import { PublicLayout } from './layouts/PublicLayout';
 import { api } from './services/api/api';
 import { getAccessToken } from './services/auth/services';
-import { fetchCountries, fetchCovidData } from './services/covidData/api';
 import { useGlobalContext } from './services/providers/GlobalProvider';
+import { fetchActiveUser } from './services/users/api';
 import './styles/style.scss';
 
 function App() {
-  const { activeUser, setCountries, setCovidData } = useGlobalContext();
+  const { activeUser, setActiveUser } = useGlobalContext();
 
   const accessToken = getAccessToken();
   if (accessToken) {
@@ -18,20 +18,13 @@ function App() {
   }
 
   useEffect(() => {
-    const func = async () => {
-      try {
-        const covidData = await fetchCovidData();
-        const countries = await fetchCountries();
-        setCountries(countries);
-        setCovidData(covidData);
-      } catch {
-        // ignore
+    (async () => {
+      if (accessToken) {
+        const user = await fetchActiveUser();
+        setActiveUser({ ...user, token: accessToken });
       }
-    };
-    if (activeUser.token) {
-      func();
-    }
-  }, [activeUser.token, setCountries, setCovidData]);
+    })();
+  }, [accessToken, setActiveUser]);
 
   return (
     <>

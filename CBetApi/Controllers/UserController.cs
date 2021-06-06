@@ -4,6 +4,11 @@ using System.Threading.Tasks;
 using CBetApi.Services;
 using CBetApi.Models.Forms;
 using CBetApi.Helpers;
+using System;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using CBetApi.Models;
+
 
 namespace CBetApi.Controllers
 {
@@ -19,7 +24,66 @@ namespace CBetApi.Controllers
             _authService = authService;
             _userService = userService;
         }
+        [Authorize]
+        [HttpGet("active")]
+        public async Task<IActionResult> Active()
+        {
+            var claimsIdentity = this.User.Identity as ClaimsIdentity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userId == null)
+            {
+                return BadRequest();
+            }
+            var user = await _userService.FindUserByIdAsync(Int32.Parse(userId));
 
+            return Ok(user);
+        }
+        [Authorize]
+        [HttpPatch]
+        public async Task<IActionResult> Update(UpdateForm options)
+        {
+            if (ModelState.IsValid == false)
+            {
+                return BadRequest();
+            }
+            var claimsIdentity = this.User.Identity as ClaimsIdentity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (userId == null)
+            {
+                return BadRequest();
+            }
+            var user = await _userService.FindUserByIdAsync(Int32.Parse(userId));
+
+
+            await _userService.UpdateAsync(options, user);
+
+            return Ok(user);
+        }
+        [HttpPatch("password")]
+        public async Task<IActionResult> UpdatePassword(UpdatePasswordForm options)
+        {
+            if (ModelState.IsValid == false)
+            {
+                return BadRequest();
+            }
+            var claimsIdentity = this.User.Identity as ClaimsIdentity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (userId == null)
+            {
+                return BadRequest();
+            }
+            var user = await _userService.FindUserByIdAsync(Int32.Parse(userId));
+
+            if (!user.VerifyPassword(options.OldPassword))
+            {
+                return BadRequest();
+            }
+            await _userService.UpdateUserPassword(user, options.NewPassword);
+
+            return Ok();
+        }
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterForm options)
         {

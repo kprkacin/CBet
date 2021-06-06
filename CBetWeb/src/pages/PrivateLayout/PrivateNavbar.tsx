@@ -35,7 +35,7 @@ export const PrivateNavbar: React.FC = () => {
           defaultActiveKey="#link"
           variant="pills"
         >
-          <Nav.Link onClick={() => {}}>Account</Nav.Link>
+          <Nav.Link onClick={() => redirect('/account')}>Account</Nav.Link>
           <Nav.Link onClick={() => onLogoutClicked()}>Log Out</Nav.Link>
         </Nav>
       </Navbar.Collapse>
