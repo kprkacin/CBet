@@ -1,5 +1,6 @@
 export interface CovidData {
   countryId: number | null;
+  countryCode: string | null;
   countryName: string | null;
   avg: number | null;
   todayLastWeek: number | null;

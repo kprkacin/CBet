@@ -71,6 +71,7 @@ namespace CBetApi
             services.AddScoped<AuthService>();
             services.AddScoped<UserService>();
             services.AddScoped<BetService>();
+            services.AddScoped<LeaderboardService>();
             services.AddHttpClient<CovidDataService>();
         }
 

@@ -7,14 +7,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace CBetApi.Models
 {
-    public class CovidHistoryData
+    public class CovidTodayData
     {
         public int CountryId { get; set; }
-        public string Code { get; set; }
-        public long ThisDayLastWeek { get; set; }
-        public long AverageLastWeek { get; set; }
-        public long Yesterday { get; set; }
-        public string CountryISO { get; set; }
+        public long Value { get; set; }
 
     }
 }

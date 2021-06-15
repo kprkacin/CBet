@@ -69,7 +69,7 @@ export const BettingPage: React.FC = () => {
         <BettingFormModal onSave={onBetSave} />
       </Modal>
 
-      <Table columns={columns(renderCountryColumn)} data={bets} />
+      <Table columns={columns(renderCountryColumn)} data={bets} pagination />
     </div>
   );
 };

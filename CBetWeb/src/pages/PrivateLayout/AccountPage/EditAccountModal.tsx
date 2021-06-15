@@ -68,6 +68,7 @@ export const EditAccountModal: React.FC<EditAccountModalProps> = (props) => {
       show={showEditAccountModal}
       onClose={handleModalClose}
       form="profileForm"
+      className="modal-lg"
       title={title}
       onSave={() => {}}
     >

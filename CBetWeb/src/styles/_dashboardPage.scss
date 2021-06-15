@@ -1,0 +1,16 @@
+.newsCard {
+  height: 600px;
+  overflow: auto;
+}
+
+.newsCard .card-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.landingPage {
+  margin: auto;
+  width: 90%;
+  height: 100vh;
+  text-align: center;
+}

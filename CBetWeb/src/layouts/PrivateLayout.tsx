@@ -5,6 +5,10 @@ import {
   DashboardPage,
 } from '../pages/PrivateLayout/DashboardPage';
 import {
+  route as leaderboardRoute,
+  LeaderboardPage,
+} from '../pages/PrivateLayout/LeaderboardPage';
+import {
   route as bettingRoute,
   BettingPage,
 } from '../pages/PrivateLayout/BettingPage/BettingPage';
@@ -38,8 +42,9 @@ export const PrivateLayout: React.FC = () => {
         <PrivateNavbar />
         <Switch>
           <Route exact path={bettingRoute} component={BettingPage} />
-          <Route exact path={dashboardRoute} component={DashboardPage} />
+          <Route exact path={leaderboardRoute} component={LeaderboardPage} />
           <Route exact path={accountRoute} component={AccountPage} />
+          <Route path={dashboardRoute} component={DashboardPage} />
         </Switch>
       </div>
     </BrowserRouter>

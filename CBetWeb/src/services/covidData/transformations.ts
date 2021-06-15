@@ -7,6 +7,7 @@ export const transformCovidData = (res: any): CovidData => {
     countryName: res.code,
     todayLastWeek: res.thisDayLastWeek,
     yesterday: res.yesterday,
+    countryCode: res.countryISO,
   };
 };
 

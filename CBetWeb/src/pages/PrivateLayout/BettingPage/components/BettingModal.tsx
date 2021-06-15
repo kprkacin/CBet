@@ -19,10 +19,10 @@ export const BettingFormModal: React.FC<BettingFormModalProps> = (props) => {
     setValue,
   } = useForm();
 
-  const { countries, covidData, activeUser } = useGlobalContext();
+  const { countries, covidData } = useGlobalContext();
 
   const { country, value, amount } = watch();
-  console.log(activeUser);
+
   const selectedCovidData = useMemo(() => {
     if (country) {
       return covidData.find((c) => c.countryId === country.id);

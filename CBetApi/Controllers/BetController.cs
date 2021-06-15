@@ -26,7 +26,6 @@ namespace CBetApi.Controllers
         }
 
 
-
         [HttpPost]
         public async Task<IActionResult> Create(BetForm options)
         {
@@ -49,8 +48,17 @@ namespace CBetApi.Controllers
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var bets = await _betService.GetBets(Int32.Parse(userId));
 
-
             return Ok(bets);
+        }
+
+        [HttpGet("sync")]
+        public async Task<IActionResult> SyncBets()
+        {
+            var bets = await _betService.GetUnvalidatedBets();
+
+            await _betService.SyncBets(bets);
+
+            return Ok();
         }
     }
 }
