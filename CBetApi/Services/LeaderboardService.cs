@@ -30,13 +30,16 @@ namespace CBetApi.Services
                 var bets = _betService.GetBets(user.Id).Result;
                 var wins = bets.Count(bet => bet.Type == "Correct");
                 float amountBet = bets.Aggregate(0, (float acc, Bet bet) => acc + bet.Amount);
+                float amountWon = bets.Aggregate(0, (float acc, Bet bet) => bet.Type == "Correct" ? acc + bet.Payout : acc + 0);
+
                 leaderboard.Add(new LeaderboardUser
                 {
                     BetAmount = amountBet,
-                    WinAmount = amountBet,
+                    WinAmount = amountWon,
                     Email = user.Email,
                     SuccessfulBets = wins,
                     Username = user.Username,
+                    CountryId = user.CountryId,
 
                 });
             }

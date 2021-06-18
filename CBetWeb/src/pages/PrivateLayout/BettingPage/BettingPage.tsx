@@ -95,6 +95,10 @@ const columns: any = (renderCountryColumn: (id: number) => JSX.Element) => {
       accessor: 'coefficient',
     },
     {
+      Header: 'Payout',
+      accessor: 'payout',
+    },
+    {
       Header: 'Country',
       Cell: (e: any) => renderCountryColumn(e.cell.row.original.countryId),
     },
@@ -105,6 +109,10 @@ const columns: any = (renderCountryColumn: (id: number) => JSX.Element) => {
     {
       Header: 'Payout Date',
       accessor: 'payoutAt',
+    },
+    {
+      Header: 'Status',
+      accessor: 'status',
     },
   ];
 };

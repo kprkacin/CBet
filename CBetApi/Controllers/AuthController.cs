@@ -37,7 +37,7 @@ namespace CBetApi.Controllers
 
             var user = _userService.FindUserByEmailAsync(options.Email).Result;
 
-            return Ok(new { user.Id, user.FirstName, user.LastName, user.Username, user.Email, token });
+            return Ok(new { user.Id, user.FirstName, user.LastName, user.Username, user.Email, user.CountryId, token });
         }
 
     }

@@ -6,6 +6,7 @@ import { Modal } from '../../../common/components/Modal';
 
 import { SelectField } from '../../../common/components/SelectField';
 import { TextField } from '../../../common/components/TextField';
+import { useGlobalContext } from '../../../services/providers/GlobalProvider';
 import { updatePassword } from '../../../services/users/api';
 import { initialUser } from '../../../services/users/consts';
 import { User } from '../../../services/users/types';
@@ -13,7 +14,10 @@ import { User } from '../../../services/users/types';
 export const EditAccountModal: React.FC<EditAccountModalProps> = (props) => {
   const { title, showEditAccountModal, user, onClose, onSave } = props;
 
-  const { control, handleSubmit, watch, reset, formState } = useForm();
+  const { countries } = useGlobalContext();
+
+  const { control, handleSubmit, watch, reset, setValue, formState } =
+    useForm();
 
   const { isDirty } = formState;
 
@@ -29,7 +33,11 @@ export const EditAccountModal: React.FC<EditAccountModalProps> = (props) => {
 
   useEffect(() => {
     reset(user);
-  }, [user, reset]);
+    var country = countries.find((c) => c.id === user.countryId);
+    if (country) {
+      setValue('country', country);
+    }
+  }, [user, countries, reset]);
 
   const onSubmit = (data: any) => {
     if (!isDirty) {
@@ -43,6 +51,7 @@ export const EditAccountModal: React.FC<EditAccountModalProps> = (props) => {
         lastName: data.lastName,
         email: data.email,
         username: data.username,
+        countryId: data.country.id,
       });
     }
     onClose();
@@ -106,19 +115,12 @@ export const EditAccountModal: React.FC<EditAccountModalProps> = (props) => {
                 as={Row}
               />
               <SelectField
-                options={[]}
+                options={countries}
                 name="country"
+                getOption={(c) => c.name}
                 placeholder="Country"
                 control={control}
                 label="Country"
-                as={Row}
-              />
-              <SelectField
-                options={[]}
-                name="role"
-                placeholder="Role"
-                control={control}
-                label="Role"
                 as={Row}
               />
             </Col>

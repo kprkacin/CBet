@@ -1,4 +1,4 @@
-import { transformUser } from '../users/transformations';
+import { transformToCreateUser, transformUser } from '../users/transformations';
 import { LoginForm, RegisterForm } from '../../pages/PublicLayout/types';
 import { createApiCall } from '../api/api';
 
@@ -24,7 +24,7 @@ export const createUser = async (register: RegisterForm) => {
     {
       url: '/User/register',
       method: 'POST',
-      data: register,
+      data: transformToCreateUser(register),
     },
     {
       success: 'User successfully registered',

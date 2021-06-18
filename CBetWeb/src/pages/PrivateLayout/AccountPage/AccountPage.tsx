@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import { Container, Col, Row, Card, ListGroup } from 'react-bootstrap';
 import { Header } from '../../../common/components/Header';
 import { Icon } from '../../../common/components/Icon';
@@ -10,10 +10,15 @@ import { User } from '../../../services/users/types';
 import { EditAccountModal } from './EditAccountModal';
 
 export const AccountPage: React.FC = () => {
-  const { activeUser, setActiveUser } = useGlobalContext();
+  const { activeUser, countries, setActiveUser } = useGlobalContext();
 
   const [showEditAccountModal, setEditAccountModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const userCountry = useMemo(
+    () => countries.find((c) => c.id === activeUser.countryId),
+    [activeUser.countryId, countries]
+  );
 
   const onAction = () => setEditAccountModal(true);
 
@@ -37,8 +42,8 @@ export const AccountPage: React.FC = () => {
   return (
     <Page isLoading={isLoading}>
       <Container fluid>
-        <Row>
-          <Col xs={12}>
+        <Row style={{ justifyContent: 'center' }}>
+          <Col xs={12} lg={6}>
             <Header
               title={`${activeUser.username || ''}`}
               action={
@@ -49,22 +54,31 @@ export const AccountPage: React.FC = () => {
                 />
               }
             />
+
             <Card>
               <Card.Body>
-                <Row>
-                  <Col xs={12}>
-                    <ListGroup variant="flush" className="card__list">
-                      <ListGroup.Item>
-                        <div className="label">Name</div>
-                        <div className="value">{`${activeUser.firstName} ${activeUser.lastName}`}</div>
-                      </ListGroup.Item>
-                      <ListGroup.Item>
-                        <div className="label">Email</div>
-                        <div className="value">{`${activeUser.email} ${activeUser.email}`}</div>
-                      </ListGroup.Item>
-                    </ListGroup>
-                  </Col>
-                </Row>
+                <ListGroup variant="flush" className="card__list">
+                  <ListGroup.Item>
+                    <div className="label">First Name</div>
+                    <div className="value">{activeUser.firstName}</div>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <div className="label">Last Name</div>
+                    <div className="value">{activeUser.lastName}</div>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <div className="label">Email</div>
+                    <div className="value">{activeUser.email}</div>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <div className="label">Phone</div>
+                    <div className="value">{activeUser.phoneNumber}</div>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <div className="label">Country</div>
+                    <div className="value">{userCountry?.name}</div>
+                  </ListGroup.Item>
+                </ListGroup>
               </Card.Body>
             </Card>
           </Col>

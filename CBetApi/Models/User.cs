@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
 namespace CBetApi.Models
@@ -14,6 +15,11 @@ namespace CBetApi.Models
         public string LastName { get; set; }
         [Required]
         public string Email { get; set; }
+        [Required]
+        public string PhoneNumber { get; set; }
+        [Required]
+        [ForeignKey(nameof(Country))]
+        public int CountryId { get; set; }
         [Required]
         public string Username { get; set; }
         [Required]

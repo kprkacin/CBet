@@ -26,6 +26,8 @@ namespace CBetApi.Services
                 LastName = model.LastName,
                 Email = model.Email,
                 Username = model.Username,
+                PhoneNumber = model.PhoneNumber,
+                CountryId = model.CountryId,
                 Password = new User().HashPassword(model.Password),
             };
 
@@ -52,6 +54,15 @@ namespace CBetApi.Services
             {
                 user.Email = model.Email;
             }
+            if (model.CountryId != null)
+            {
+                user.CountryId = model.CountryId ?? default(int);
+            }
+            if (model.PhoneNumber != null)
+            {
+                user.PhoneNumber = model.PhoneNumber;
+            }
+
 
 
             _db.Attach(user);

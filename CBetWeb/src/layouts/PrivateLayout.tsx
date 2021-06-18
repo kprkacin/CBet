@@ -21,31 +21,31 @@ import { fetchCovidData, fetchCountries } from '../services/covidData/api';
 import { useGlobalContext } from '../services/providers/GlobalProvider';
 
 export const PrivateLayout: React.FC = () => {
-  const { setCountries, setCovidData } = useGlobalContext();
+  const { setCovidData } = useGlobalContext();
 
   useEffect(() => {
     (async () => {
       try {
         const covidData = await fetchCovidData();
-        const countries = await fetchCountries();
-        setCountries(countries);
         setCovidData(covidData);
       } catch {
         // ignore
       }
     })();
-  }, [setCountries, setCovidData]);
+  }, [setCovidData]);
 
   return (
     <BrowserRouter>
       <div className="privateWrapper">
-        <PrivateNavbar />
-        <Switch>
-          <Route exact path={bettingRoute} component={BettingPage} />
-          <Route exact path={leaderboardRoute} component={LeaderboardPage} />
-          <Route exact path={accountRoute} component={AccountPage} />
-          <Route path={dashboardRoute} component={DashboardPage} />
-        </Switch>
+        <div className="innerWrapper">
+          <PrivateNavbar />
+          <Switch>
+            <Route exact path={bettingRoute} component={BettingPage} />
+            <Route exact path={leaderboardRoute} component={LeaderboardPage} />
+            <Route exact path={accountRoute} component={AccountPage} />
+            <Route path={dashboardRoute} component={DashboardPage} />
+          </Switch>
+        </div>
       </div>
     </BrowserRouter>
   );

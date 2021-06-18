@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authorization;
 namespace CBetApi.Controllers
 {
     [ApiController]
-    [Authorize]
     [Route("v1/[controller]")]
     public class CovidDataController : ControllerBase
     {

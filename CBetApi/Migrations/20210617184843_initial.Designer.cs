@@ -3,22 +3,22 @@ using System;
 using CBetApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CBetApi.Migrations
 {
     [DbContext(typeof(CBetApiDbContext))]
-    [Migration("20210527192835_addedYesterdayToData")]
-    partial class addedYesterdayToData
+    [Migration("20210617184843_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "6.0.0-preview.3.21201.2")
+                .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
             modelBuilder.Entity("CBetApi.Models.Bet", b =>
@@ -28,8 +28,8 @@ namespace CBetApi.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<double>("Amount")
-                        .HasColumnType("double precision");
+                    b.Property<float>("Amount")
+                        .HasColumnType("real");
 
                     b.Property<float>("Coeficient")
                         .HasColumnType("real");
@@ -1234,6 +1234,9 @@ namespace CBetApi.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<int>("CountryId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
@@ -1250,6 +1253,10 @@ namespace CBetApi.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("text");
@@ -1257,17 +1264,6 @@ namespace CBetApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 2,
-                            Email = "email@email.em",
-                            FirstName = "Test2",
-                            LastName = "TestLast",
-                            Password = "testpass",
-                            Username = "TestUserName"
-                        });
                 });
 
             modelBuilder.Entity("CBetApi.Models.Bet", b =>

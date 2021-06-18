@@ -23,6 +23,7 @@ namespace CBetApi.Models
         public float Coeficient { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime PayoutAt { get; set; }
+        public float Payout => Amount * Coeficient;
         public string Type { get; set; }
 
     }

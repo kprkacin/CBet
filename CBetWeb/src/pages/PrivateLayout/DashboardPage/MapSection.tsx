@@ -24,7 +24,6 @@ export const MapSection: React.FC = () => {
     <div style={{ marginLeft: '5%' }}>
       <WorldMap
         color="red"
-        title="Average Cases Last Week"
         value-suffix="people"
         backgroundColor="inherit"
         size="xxl"

@@ -1,14 +1,23 @@
 .wrapper {
   display: flex;
   width: 100%;
+  overflow: auto;
+  min-height: 100vh;
   background-color: $cBetPrimary;
 }
 .privateWrapper {
   display: flex;
   width: 100%;
+  min-height: 100vh;
   flex-direction: column;
   background-color: $cBetPrimary;
 }
+.innerWrapper {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .roundButton {
   display: flex;
   flex-direction: row;
@@ -21,4 +30,45 @@
   color: darkgrey !important;
   background-color: white !important;
   line-height: 16px;
+}
+
+.navBar {
+  width: 100%;
+  background-color: $cBetPrimary;
+}
+
+.navBar .navbar-brand {
+  display: 'flex';
+  align-items: 'center';
+  cursor: pointer;
+}
+.navBar .navbar-collapse {
+  text-align: center;
+  & .navbar-nav {
+    align-items: center;
+  }
+}
+
+input,
+select {
+  background-color: white;
+  width: 100%;
+  height: 32px;
+  padding: 4px 12px;
+  border: 1px solid #ebf0f5;
+  border-radius: 4px;
+  color: grey;
+  font-size: 12px;
+  font-weight: 400;
+  &:disabled {
+    background-color: darkgrey;
+  }
+  &::placeholder {
+    color: grey;
+    font-weight: normal;
+    font-size: 12px;
+  }
+  &:focus {
+    box-shadow: unset;
+  }
 }

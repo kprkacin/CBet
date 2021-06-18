@@ -11,6 +11,8 @@ export const transformBet = (res: any): Bet => {
     coefficient: res.coeficient,
     createdAt: res.createdAt ? dateToFormatedString(res.createdAt) : null,
     payoutAt: res.payoutAt ? dateToFormatedString(res.payoutAt) : null,
+    payout: res.payout,
+    status: res.type,
   };
 };
 

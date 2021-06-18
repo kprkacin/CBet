@@ -6,5 +6,7 @@ export const initialUser: User = {
   lastName: null,
   username: null,
   email: null,
+  countryId: null,
+  phoneNumber: null,
   token: getAccessToken(),
 };

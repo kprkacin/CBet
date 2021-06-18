@@ -7,5 +7,6 @@ export const transformLeaderboard = (res: any): Leaderboard => {
     successfulBets: res.successfulBets,
     winAmount: res.winAmount,
     betAmount: res.betAmount,
+    countryId: res.countryId,
   };
 };

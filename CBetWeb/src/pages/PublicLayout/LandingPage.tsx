@@ -15,13 +15,24 @@ export const LandingPage: React.FC = () => {
 
   return (
     <div className="landingPage">
-      <Navbar sticky="top" expand="lg">
-        <Navbar.Brand href="#home">CBet</Navbar.Brand>
+      <Navbar className="navBar" collapseOnSelect sticky="top" expand="lg">
+        <Navbar.Brand href="#">
+          <img
+            style={{ marginRight: '10px' }}
+            width="45"
+            height="45"
+            alt="logo"
+            src="/logo.png"
+          />
+          CBet
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="landingNav" id="basic-navbar-nav">
           <Nav>
-            <Nav.Link href="#home">Features</Nav.Link>
-            <Nav.Link href="#link">About Us</Nav.Link>
+            <Nav.Link eventKey="2" href="#features">
+              Features
+            </Nav.Link>
+            <Nav.Link href="#about">About Us</Nav.Link>
           </Nav>
           <Nav
             className="justify-content-end"
@@ -43,7 +54,9 @@ export const LandingPage: React.FC = () => {
         </p>
         <Button>Try it out!</Button>
       </Jumbotron>
-      <h1 style={{ textAlign: 'center', marginTop: '150px' }}>Features</h1>
+      <h1 id="features" style={{ textAlign: 'center', marginTop: '150px' }}>
+        Features
+      </h1>
       <Jumbotron className="landingCardJumbo" fluid>
         <Card className="landingCard" bg="Info">
           <Card.Body>
@@ -74,7 +87,7 @@ export const LandingPage: React.FC = () => {
         </Card>
       </Jumbotron>
       <Jumbotron className="landingJumbo" fluid>
-        <h1>About Us</h1>
+        <h1 id="about">About Us</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad

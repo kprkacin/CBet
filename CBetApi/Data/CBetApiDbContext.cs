@@ -21,7 +21,6 @@ namespace CBetApi.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>().HasData(new User { Id = 2, FirstName = "Test2", LastName = "TestLast", Email = "email@email.em", Password = "testpass", Username = "TestUserName" });
 
             var countryList = Country.countryList;
             for (int i = 0; i < countryList.Count(); i++)

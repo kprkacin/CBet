@@ -1,7 +1,15 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
+import {
+  Button,
+  Card,
+  Col,
+  Container,
+  Form,
+  Navbar,
+  Row,
+} from 'react-bootstrap';
 
 import { LoginForm } from './types';
 import { yupLoginSchema } from './validations';
@@ -45,9 +53,23 @@ export const LoginPage: React.FC = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="form"
       >
-        <Container fluid className="loginPage">
-          <Row style={{ width: '35%', margin: 'auto' }}>
-            <Col xs={12}>
+        <Container className="loginPage">
+          <Navbar className="navBar" sticky="top" expand="lg">
+            <Navbar.Brand href="/">
+              <img
+                style={{ marginRight: '10px' }}
+                width="45"
+                height="45"
+                alt="logo"
+                src="/logo.png"
+              />
+              CBet
+            </Navbar.Brand>
+          </Navbar>
+          <Row
+            style={{ width: '100%', margin: 'auto', justifyContent: 'center' }}
+          >
+            <Col xs={12} lg={4}>
               <Card className="loginCard">
                 <Card.Body>
                   <h4>Log In</h4>
