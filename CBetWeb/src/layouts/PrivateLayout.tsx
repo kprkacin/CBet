@@ -7,7 +7,7 @@ import {
 import {
   route as leaderboardRoute,
   LeaderboardPage,
-} from '../pages/PrivateLayout/LeaderboardPage';
+} from '../pages/PrivateLayout/LeaderboardPage/LeaderboardPage';
 import {
   route as bettingRoute,
   BettingPage,

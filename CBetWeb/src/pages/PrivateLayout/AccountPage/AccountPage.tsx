@@ -50,6 +50,7 @@ export const AccountPage: React.FC = () => {
                 <IconButton
                   icon={<Icon name="add_circle" color="primary" />}
                   title="Edit Account"
+                  disabled={activeUser.thirdParty}
                   onClick={onAction}
                 />
               }

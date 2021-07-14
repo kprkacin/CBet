@@ -1,7 +1,7 @@
 import { Button } from 'react-bootstrap';
 
 export const IconButton: React.FC<IconButtonProps> = (props) => {
-  const { icon, title, form, onClick } = props;
+  const { icon, title, form, disabled = false, onClick } = props;
 
   return (
     <Button
@@ -9,6 +9,7 @@ export const IconButton: React.FC<IconButtonProps> = (props) => {
       size="sm"
       className="iconButton"
       variant="light"
+      disabled={disabled}
       type={form ? 'submit' : undefined}
       onClick={onClick}
     >
@@ -22,5 +23,6 @@ export interface IconButtonProps {
   icon: React.ReactNode;
   title?: string;
   form?: string;
+  disabled?: boolean;
   onClick?: () => void;
 }

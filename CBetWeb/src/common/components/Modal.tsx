@@ -3,7 +3,16 @@ import { IconButton } from './IconButton';
 import { Modal as BootstrapModal } from 'react-bootstrap';
 
 export const Modal: React.FC<ModalProps> = (props) => {
-  const { className, children, title, show, form, onClose, onSave } = props;
+  const {
+    className,
+    children,
+    title,
+    show,
+    form,
+    saveButtonDialog = 'save changes',
+    onClose,
+    onSave,
+  } = props;
 
   return (
     <BootstrapModal
@@ -18,7 +27,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
           {onSave && (
             <IconButton
               icon={<Icon name="check_circle_24px" color="primary" />}
-              title="save changes"
+              title={saveButtonDialog}
               form={form}
               onClick={onSave}
             />
@@ -38,6 +47,7 @@ export interface ModalProps {
   title?: string;
   show: boolean;
   form?: string;
+  saveButtonDialog?: string;
   className?: string;
   onClose(): void;
   onSave?(): Promise<void> | void;

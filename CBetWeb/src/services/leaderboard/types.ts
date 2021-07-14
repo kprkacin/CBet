@@ -5,4 +5,5 @@ export interface Leaderboard {
   winAmount: number | null;
   betAmount: number | null;
   countryId: number | null;
+  userId: number | null;
 }

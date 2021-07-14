@@ -105,7 +105,7 @@ namespace CBetApi.Controllers
             var token = new TokenHelper().GenerateToken(newUser.Id, newUser.Email);
 
 
-            return Ok(new { newUser.Id, newUser.FirstName, newUser.LastName, newUser.Username, newUser.Email, token });
+            return Ok(new { newUser.Id, newUser.FirstName, newUser.LastName, newUser.Username, newUser.Email, newUser.ThirdParty, token });
         }
     }
 }

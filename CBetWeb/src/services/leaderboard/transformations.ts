@@ -8,5 +8,6 @@ export const transformLeaderboard = (res: any): Leaderboard => {
     winAmount: res.winAmount,
     betAmount: res.betAmount,
     countryId: res.countryId,
+    userId: res.id,
   };
 };

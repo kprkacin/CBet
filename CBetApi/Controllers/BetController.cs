@@ -50,6 +50,18 @@ namespace CBetApi.Controllers
 
             return Ok(bets);
         }
+        [HttpGet("by-user")]
+        public async Task<IActionResult> GetByUser(int userId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Unauthorized();
+            }
+
+            var bets = await _betService.GetBets(userId);
+
+            return Ok(bets);
+        }
 
         [HttpGet("sync")]
         public async Task<IActionResult> SyncBets()

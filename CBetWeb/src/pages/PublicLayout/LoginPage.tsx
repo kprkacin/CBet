@@ -10,14 +10,20 @@ import {
   Navbar,
   Row,
 } from 'react-bootstrap';
+import {
+  GoogleLoginResponse,
+  GoogleLoginResponseOffline,
+} from 'react-google-login';
 
 import { LoginForm } from './types';
 import { yupLoginSchema } from './validations';
 import { initialFormLogin } from './consts';
-import { validateUser } from '../../services/auth/api';
+import { googleSignIn, validateUser } from '../../services/auth/api';
 import { useGlobalContext } from '../../services/providers/GlobalProvider';
 import { setAccessToken } from '../../services/auth/services';
 import { TextFieldVertical } from '../../common/components/TextFieldVertical';
+import GoogleLogin from 'react-google-login';
+import toast from 'react-hot-toast';
 
 export const LoginPage: React.FC = () => {
   const {
@@ -30,7 +36,20 @@ export const LoginPage: React.FC = () => {
   });
 
   const { setActiveUser } = useGlobalContext();
-
+  const responseGoogle = async (
+    response: GoogleLoginResponseOffline | GoogleLoginResponse
+  ) => {
+    if (response.code) {
+      toast.error('Login Error');
+    }
+    try {
+      const user = await googleSignIn(response as GoogleLoginResponse);
+      setActiveUser(user);
+      setAccessToken(user.token || '');
+    } catch (e) {
+      // ignore error
+    }
+  };
   useEffect(() => {
     reset(initialFormLogin);
   }, [reset]);
@@ -69,7 +88,7 @@ export const LoginPage: React.FC = () => {
           <Row
             style={{ width: '100%', margin: 'auto', justifyContent: 'center' }}
           >
-            <Col xs={12} lg={4}>
+            <Col xs={12} md={8} lg={6}>
               <Card className="loginCard">
                 <Card.Body>
                   <h4>Log In</h4>
@@ -88,7 +107,27 @@ export const LoginPage: React.FC = () => {
                     className="loginInput"
                     error={!!errors.password}
                   />
-                  <Button type="submit">Login</Button>
+                  <div
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <Button
+                      style={{ height: '43px', width: '95px' }}
+                      type="submit"
+                    >
+                      Login
+                    </Button>
+                    <GoogleLogin
+                      clientId="1021556519319-5p5njbpduoef09teftaft7tfifsck326.apps.googleusercontent.com"
+                      buttonText="Login With Google"
+                      onSuccess={responseGoogle}
+                      onFailure={responseGoogle}
+                      cookiePolicy={'single_host_origin'}
+                    />
+                  </div>
                 </Card.Body>
               </Card>
             </Col>

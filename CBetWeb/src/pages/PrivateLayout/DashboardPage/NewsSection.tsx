@@ -12,7 +12,6 @@ export const NewsSection: React.FC = () => {
     (async () => {
       try {
         const newsData = await fetchNews();
-        console.log(newsData);
         setNews(newsData);
       } catch (e) {
         //ignore error

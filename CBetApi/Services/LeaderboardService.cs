@@ -40,6 +40,7 @@ namespace CBetApi.Services
                     SuccessfulBets = wins,
                     Username = user.Username,
                     CountryId = user.CountryId,
+                    Id = user.Id,
 
                 });
             }

@@ -15,6 +15,7 @@ namespace CBetApi.Data
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Bet> Bets { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
         public DbSet<Country> Countries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

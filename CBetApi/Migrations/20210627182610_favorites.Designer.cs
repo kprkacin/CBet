@@ -3,15 +3,17 @@ using System;
 using CBetApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CBetApi.Migrations
 {
     [DbContext(typeof(CBetApiDbContext))]
-    partial class CBetApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210627182610_favorites")]
+    partial class favorites
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

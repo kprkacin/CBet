@@ -28,7 +28,27 @@ namespace CBetApi.Services
                 Username = model.Username,
                 PhoneNumber = model.PhoneNumber,
                 CountryId = model.CountryId,
+                ThirdParty = false,
                 Password = new User().HashPassword(model.Password),
+            };
+
+            var newUser = await _db.AddAsync(user);
+            await _db.SaveChangesAsync();
+
+            return newUser.Entity;
+        }
+        public async Task<User> CreateThirdParty(GoogleForm model)
+        {
+            var user = new User()
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                Username = model.FirstName,
+                PhoneNumber = "",
+                CountryId = 191,
+                ThirdParty = true,
+                Password = new User().HashPassword(""),
             };
 
             var newUser = await _db.AddAsync(user);

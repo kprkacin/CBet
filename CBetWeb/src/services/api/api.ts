@@ -25,7 +25,7 @@ export const createApiCall =
     } catch (e) {
       error
         ? toast.error(error)
-        : toast.error(e.response.data.title || e.response.message);
+        : toast.error(e.response.data.title || e.response.data.message);
 
       throw e;
     }

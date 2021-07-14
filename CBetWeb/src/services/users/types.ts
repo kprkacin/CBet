@@ -6,4 +6,6 @@ export interface User {
   token: string | null;
   countryId: number | null;
   phoneNumber: string | null;
+  thirdParty: boolean;
+  id: number | null;
 }
